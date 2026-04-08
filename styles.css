@@ -1,0 +1,777 @@
+:root {
+  --bg: #0b0d11;
+  --bg-alt: #12161d;
+  --surface: rgba(19, 24, 31, 0.72);
+  --surface-strong: rgba(22, 28, 37, 0.9);
+  --line: rgba(255, 255, 255, 0.1);
+  --text: #f7f1e4;
+  --muted: #c2baa9;
+  --accent: #ff5a2a;
+  --accent-soft: rgba(255, 90, 42, 0.16);
+  --accent-2: #ffd166;
+  --accent-3: #4fd1c5;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  --radius-lg: 32px;
+  --radius-md: 22px;
+  --radius-sm: 14px;
+  --container: min(1180px, calc(100vw - 32px));
+  --header-height: 78px;
+  --glow-x: 50%;
+  --glow-y: 10%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 12% 16%, rgba(255, 90, 42, 0.18), transparent 24%),
+    radial-gradient(circle at 86% 12%, rgba(79, 209, 197, 0.16), transparent 20%),
+    linear-gradient(180deg, #090b0f 0%, #11151d 45%, #0a0c11 100%);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent);
+  z-index: -2;
+}
+
+.page-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(255, 209, 102, 0.11), transparent 18%),
+    radial-gradient(circle at calc(var(--glow-x) + 8%) calc(var(--glow-y) + 20%), rgba(255, 90, 42, 0.13), transparent 24%);
+  z-index: -1;
+  transition: background-position 160ms ease-out;
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: 100%;
+  height: 4px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+  box-shadow: 0 0 24px rgba(255, 90, 42, 0.5);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: var(--container);
+  margin: 18px auto 0;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(10, 13, 18, 0.68);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
+}
+
+.brand {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.55rem;
+  letter-spacing: 0.12em;
+  color: var(--accent-2);
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.site-nav a {
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.site-nav a:hover,
+.site-nav a.is-active {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+main {
+  width: var(--container);
+  margin: 0 auto;
+  padding-bottom: 64px;
+}
+
+.section {
+  padding: 88px 0;
+}
+
+.section-alt {
+  position: relative;
+}
+
+.section-alt::before {
+  content: "";
+  position: absolute;
+  inset: 34px -18px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 36px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  z-index: -1;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
+  gap: 30px;
+  align-items: center;
+  min-height: calc(100svh - var(--header-height));
+  padding-top: 46px;
+}
+
+.hero-copy h1 {
+  margin: 0;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  line-height: 0.92;
+  letter-spacing: 0.03em;
+}
+
+.hero-copy h1 span {
+  display: block;
+  color: var(--accent-2);
+  text-shadow: 0 0 40px rgba(255, 209, 102, 0.2);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  color: var(--accent-3);
+  font-size: 0.92rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 46px;
+  height: 1px;
+  background: currentColor;
+}
+
+.lead {
+  max-width: 52ch;
+  margin: 24px 0 0;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button-primary {
+  color: #111;
+  background: linear-gradient(135deg, var(--accent-2), #ff9f45);
+  box-shadow: 0 10px 32px rgba(255, 209, 102, 0.28);
+}
+
+.button-secondary {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.hero-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.panel-card,
+.stat-card,
+.feature-card,
+.artist-card,
+.spotlight-card,
+.bio-card,
+.song-card,
+.lyric-card,
+.fact-card,
+.opinion-banner {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow);
+}
+
+.panel-card {
+  padding: 24px;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+}
+
+.panel-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -42% auto;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 90, 42, 0.3), transparent 68%);
+}
+
+.panel-label,
+.spotlight-tag {
+  margin: 0;
+  font-size: 0.86rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-3);
+}
+
+.panel-text,
+.feature-card p,
+.artist-card p,
+.song-card p,
+.lyric-card p,
+.fact-card p,
+.opinion-banner p,
+.bio-card li,
+.timeline-item p,
+.spotlight-card p {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.equalizer {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+  align-items: end;
+  height: 120px;
+  margin: 24px 0 10px;
+}
+
+.equalizer span {
+  display: block;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(180deg, var(--accent-2), var(--accent), var(--accent-3));
+  animation: bounce 1400ms ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.equalizer span:nth-child(1) {
+  height: 35%;
+  animation-delay: 0ms;
+}
+
+.equalizer span:nth-child(2) {
+  height: 80%;
+  animation-delay: 120ms;
+}
+
+.equalizer span:nth-child(3) {
+  height: 52%;
+  animation-delay: 240ms;
+}
+
+.equalizer span:nth-child(4) {
+  height: 96%;
+  animation-delay: 360ms;
+}
+
+.equalizer span:nth-child(5) {
+  height: 68%;
+  animation-delay: 480ms;
+}
+
+.equalizer span:nth-child(6) {
+  height: 88%;
+  animation-delay: 600ms;
+}
+
+.equalizer span:nth-child(7) {
+  height: 48%;
+  animation-delay: 720ms;
+}
+
+.equalizer span:nth-child(8) {
+  height: 76%;
+  animation-delay: 840ms;
+}
+
+.stat-grid,
+.feature-grid,
+.artist-grid,
+.song-grid,
+.lyrics-grid,
+.facts-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.stat-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stat-card {
+  padding: 22px 20px;
+  min-height: 140px;
+}
+
+.stat-value {
+  display: block;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.8rem;
+  letter-spacing: 0.05em;
+  color: var(--accent-2);
+}
+
+.stat-label {
+  display: block;
+  margin-top: 8px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.section-heading {
+  max-width: 720px;
+  margin-bottom: 30px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+}
+
+.feature-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.feature-card,
+.artist-card,
+.song-card,
+.lyric-card,
+.fact-card {
+  padding: 26px;
+}
+
+.feature-card h3,
+.timeline-item h3,
+.artist-card h3,
+.spotlight-card h3,
+.bio-card h3,
+.song-card h3,
+.fact-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+}
+
+.opinion-banner {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 18px;
+  align-items: start;
+  margin-top: 20px;
+  padding: 26px;
+}
+
+.opinion-banner h3 {
+  margin: 6px 0 10px;
+  font-size: 1.3rem;
+}
+
+.quote-mark {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 5rem;
+  line-height: 0.8;
+  color: var(--accent);
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 18px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 18px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), rgba(255, 255, 255, 0.08));
+}
+
+.timeline-item {
+  position: relative;
+  margin-left: 52px;
+  padding: 24px 24px 24px 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(18, 22, 29, 0.82);
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 30px;
+  left: -42px;
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--accent-2);
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 0 0 8px rgba(255, 209, 102, 0.08);
+}
+
+.timeline-year {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-2);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.artist-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.artist-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.artist-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -12% -24% auto;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(79, 209, 197, 0.2), transparent 72%);
+}
+
+.artist-number,
+.song-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  color: var(--accent-2);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.spotlight-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 18px;
+}
+
+.spotlight-card,
+.bio-card {
+  padding: 28px;
+}
+
+.spotlight-card {
+  background:
+    linear-gradient(180deg, rgba(255, 90, 42, 0.14), transparent 60%),
+    var(--surface-strong);
+}
+
+.spotlight-card h3 {
+  margin-top: 10px;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+}
+
+.spotlight-subtitle {
+  margin-top: -2px;
+  color: var(--accent-2);
+}
+
+.bio-card h3 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: 0.05em;
+}
+
+.bio-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.bio-list li + li {
+  margin-top: 12px;
+}
+
+.song-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.song-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.lyrics-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lyric-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.lyric-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 209, 102, 0.08), transparent 34%);
+  pointer-events: none;
+}
+
+.lyric-line {
+  position: relative;
+  margin: 0 0 16px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.facts-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.site-footer {
+  width: var(--container);
+  margin: 0 auto 42px;
+  padding: 0 0 28px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.site-footer a {
+  color: var(--accent-2);
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.985);
+  transition:
+    opacity 620ms ease,
+    transform 620ms cubic-bezier(0.2, 0.7, 0, 1);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scaleY(0.64);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scaleY(1.08);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1080px) {
+  .hero,
+  .spotlight-layout,
+  .feature-grid,
+  .artist-grid,
+  .song-grid,
+  .lyrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-grid,
+  .facts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 24px;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --container: min(100vw - 20px, 100%);
+  }
+
+  .site-header {
+    display: block;
+    border-radius: 28px;
+    padding: 16px;
+  }
+
+  .site-nav {
+    justify-content: flex-start;
+    margin-top: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  .section-alt::before {
+    inset: 20px -8px;
+    border-radius: 28px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(3.4rem, 20vw, 5.4rem);
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  .opinion-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-item {
+    margin-left: 40px;
+  }
+
+  .timeline::before {
+    left: 12px;
+  }
+
+  .timeline-item::before {
+    left: -34px;
+  }
+
+  .stat-grid,
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card,
+  .artist-card,
+  .song-card,
+  .lyric-card,
+  .fact-card,
+  .spotlight-card,
+  .bio-card,
+  .timeline-item,
+  .panel-card,
+  .opinion-banner {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .lyric-line {
+    font-size: 1.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .reveal,
+  .js .reveal.is-visible,
+  .equalizer span,
+  .site-nav a,
+  .button,
+  .page-glow,
+  .scroll-progress {
+    transition: none;
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+}
