@@ -99,7 +99,13 @@ a {
   backdrop-filter: blur(18px);
   box-shadow: var(--shadow);
 }
-
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex: 1;
+}
 .brand {
   font-family: "Bebas Neue", sans-serif;
   font-size: 1.55rem;
@@ -129,6 +135,58 @@ a {
   transform: translateY(-1px);
 }
 
+
+
+lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 14px 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.lang-toggle:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 209, 102, 0.35);
+  box-shadow: 0 8px 24px rgba(255, 209, 102, 0.14);
+}
+
+.lang-toggle.is-italian {
+  background: rgba(255, 90, 42, 0.1);
+  border-color: rgba(255, 90, 42, 0.28);
+}
+
+.lang-toggle-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-2), #ff9f45);
+  color: #111;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+}
+
+.lang-toggle-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
 main {
   width: var(--container);
   margin: 0 auto;
@@ -689,7 +747,12 @@ main {
     padding: 16px;
   }
 
-  .site-nav {
+  
+  .header-actions {
+    display: block;
+  }
+  
+   .site-nav {
     justify-content: flex-start;
     margin-top: 12px;
     overflow-x: auto;
@@ -700,6 +763,12 @@ main {
     display: none;
   }
 
+  .lang-toggle {
+    justify-content: center;
+    width: 100%;
+    margin-top: 14px;
+  }
+  
   .section {
     padding: 72px 0;
   }
